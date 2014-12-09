@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/image_capture"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:layout_centerHorizontal="true" >
+    </ImageView>
+
+    <RelativeLayout
+        android:id="@+id/control_layout"
+        android:layout_width="200dip"
+        android:layout_height="180dip"
+        android:layout_above="@+id/startGavity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" >
+
+        <ImageButton
+            android:id="@+id/button_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dip"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/forward" />
+
+        <ImageButton
+            android:id="@+id/button_stop"
+            android:layout_width="55dip"
+            android:layout_height="55dip"
+            android:layout_below="@id/button_forward"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/stop" />
+
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_stop"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:id="@+id/button_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_forward"
+            android:layout_toLeftOf="@id/button_stop"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/left" />
+
+        <ImageButton
+            android:id="@+id/button_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_forward"
+            android:layout_toRightOf="@id/button_stop"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/right" />
+
+        <TextView
+            android:id="@+id/text_wifi_connect"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_alignLeft="@+id/button_left"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/background"
+            android:gravity="center"
+            android:text="Searching WIFI"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/startGavity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/videoCaputre"
+        android:text="@string/start_gravity" />
+
+    <CheckBox
+        android:id="@+id/videoCaputre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/video_capture" />
+
+</RelativeLayout>
