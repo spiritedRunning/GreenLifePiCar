@@ -7,7 +7,10 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -65,6 +68,7 @@ public class MainActivity extends Activity implements OnClickListener
 	private int cmd_port = 5888;
 	private int img_port = 12088;
 	private Socket pic_socket = null;
+	private DatagramSocket dgram_socket = null;
 	
 	private String forward_cmd = "0x55";
 	private String back_cmd = "0x56";
@@ -454,7 +458,12 @@ public class MainActivity extends Activity implements OnClickListener
 				// InetAddress serverAddr = InetAddress.getByName(dev_ip);
 				Log.v(tag, "connecting...");
 				
+				/****** TCP ******/
 				pic_socket = new Socket(dev_ip, img_port);
+				
+				/****** UDP ******/
+				// dgram_socket = new DatagramSocket(img_port);
+				// dgram_socket.setSoTimeout(5000);
 			}
 			catch (IOException e)
 			{
@@ -474,10 +483,10 @@ public class MainActivity extends Activity implements OnClickListener
 				Message m = Message.obtain();
 				m.what = MSG_IMGSHOW;
 				
-				// InputStream in;
 				try
 				{
 					
+					/********************* TCP client ************************/
 					DataInputStream dis = new DataInputStream(pic_socket.getInputStream());
 					int picSize = dis.readInt();
 					Log.v(tag, "picLen = " + picSize);
@@ -497,10 +506,23 @@ public class MainActivity extends Activity implements OnClickListener
 					bitmap.compress(CompressFormat.JPEG, 100, output);
 					bmpHandler.sendMessage(m);
 					
-					String ack = "got it!";
-					DataOutputStream dos = new DataOutputStream(pic_socket.getOutputStream());
-					dos.writeChars(ack);
-					dos.flush();
+					/********************* UDP server ************************/
+					// byte[] buf = new byte[30000];
+					// DatagramPacket packet = new DatagramPacket(buf, 30000);
+					// dgram_socket.receive(packet);
+					// Log.v(tag, "start decodes--->");
+					//
+					// ByteArrayOutputStream output = new
+					// ByteArrayOutputStream();
+					// bitmap = BitmapFactory.decodeByteArray(packet.getData(),
+					// 0, packet.getData().length);
+					// bitmap.compress(CompressFormat.JPEG, 100, output);
+					// bmpHandler.sendMessage(m);
+					
+					/* --------------------------------------------------- */
+					// String ack = "got it!";
+					// OutputStream out = pic_socket.getOutputStream();
+					// out.write(ack.getBytes());
 					
 				}
 				catch (IOException e)

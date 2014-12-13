@@ -6,8 +6,8 @@ pkg_config_lib = `pkg-config --cflags opencv --libs opencv`
 IFLAGS = $(include_dirs)
 LIBS = $(pkg_config_lib)
 
-target = picSend
-objects = picSend.o
+target = udppicSend
+objects = udppicSend.o
 
 all: $(objects)
 	$(CC) -o $(target)  $(LIBS) -lpthread $(objects)

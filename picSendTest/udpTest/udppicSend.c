@@ -3,7 +3,7 @@
 
 //#include "opencv2/opencv.hpp"
 //#include "opencv/cv.h"
-#include "opencv/highgui.h" // only necessary
+#include "opencv/highgui.h"
 //#include "highgui.h"
 
 #include <sys/types.h>
@@ -39,7 +39,7 @@ void set_timer()
 {
     printf("start timer..\n");
 
-    itv.it_interval.tv_sec = 3;
+    itv.it_interval.tv_sec = 2;
     itv.it_interval.tv_usec = 0;
     itv.it_value = itv.it_interval;
     setitimer(ITIMER_REAL, &itv, &oldtv);
@@ -75,7 +75,6 @@ int getFrameOpr()
     
     /* initialize camera */
     capture = cvCreateCameraCapture(0);
-    // capture = cvCaptureFromCAM(0);
     cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH, 320);
     cvSetCaptureProperty(capture, CV_CAP_PROP_FRAME_HEIGHT, 240);
     // cvSetCaptureProperty(capture, CV_CAP_PROP_FPS, 5);
@@ -116,13 +115,13 @@ int getFrameOpr()
         // send picture size
         printf("picture size: %d \n", size);
         size = htonl(size);
-        printf("picture size: %d \n", size);
         write(new_socket, (void *)&size, sizeof(int));
 
         while(!feof(picture))
         {
              readsize = fread(send_buffer, 1, sizeof(send_buffer) - 1, picture);
-             int ret = write(new_socket, send_buffer, readsize);
+	     int ret = sendto(main_socket, send_buffer, sizeof(send_buffer) - 1, 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
+             // int ret = write(new_socket, send_buffer, readsize);
              if (-1 == ret)
              {
                  printf("%m", errno);
@@ -140,7 +139,6 @@ int getFrameOpr()
         // wait client ack
         // char ackString[MAX_DATA_BUFFER] = "";
         // read(new_socket, (void*)ackString, DATA_STREAM_LEN);
-        // printf("[0]ack: %s\n", ackString);
         // while (strcmp(ackString, msg_ack))
         // {
 	//     read(new_socket, (void*)ackString, DATA_STREAM_LEN);
@@ -167,7 +165,7 @@ void *captureProcess(void *arg)
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(IMG_TRANS_PORT);
 
-    if ((main_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    if ((main_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
     {
         printf("capture socket init failed\n");
         return (void*)1;
@@ -183,22 +181,7 @@ void *captureProcess(void *arg)
         return (void*)1;
     }
 
-    listen(main_socket, 10);
-
-    printf("waiting accept socket...\n");
-    addrlen = sizeof(struct sockaddr); // important
-    new_socket = accept(main_socket, (struct sockaddr*)&client_addr, (socklen_t*)&addrlen);
-    printf("accept_socket = %d\n", new_socket);
-    if (new_socket < 0)
-    {
-        printf("accept failed\n");
-        return (void*)1;
-    }
-
-    set_timer();
-    signal(SIGALRM, signal_handler);
     getFrameOpr();
-
 }
 
 

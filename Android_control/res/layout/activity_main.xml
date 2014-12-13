@@ -11,7 +11,8 @@
     <ImageView
         android:id="@+id/image_capture"
         android:layout_width="200dip"
-        android:layout_height="200dip"
+        android:layout_height="150dip"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" >
     </ImageView>
 
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="25dip"
             android:background="#00000000"
             android:scaleType="fitXY"
             android:src="@drawable/forward" />
