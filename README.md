@@ -20,4 +20,5 @@ Requirement Devices:
 5. L298N double H motor driver board(+5V~+35V)
 6. HC-SR04 ultrasonic detect distance sensor(accuracy: 0.3cm)
 7. portable source 
+8. a USB camera
 8. 1-way relay mode(5V, optional)
