@@ -5,6 +5,7 @@ The project using Android smartphone to control Raspberry pi, including basic mo
 
 
 Requirement Devices:
+
 1. Raspberry pi Mode B Rev2
 2. Meizu mx mobile phone(4.1.1)
 3. DHT11 humiture sensor(3.5V-5.5V DC) / DS18B20 temperature sensor
