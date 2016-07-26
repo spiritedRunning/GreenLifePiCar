@@ -1,7 +1,7 @@
 GreenLifePiCar
 ==============
 
-The project using Android smartphone to control Raspberry pi, including basic moving by motors control, ultrasonic detection when Pi moving towards to the obstacle less than 10cm e.g, Pi will stop itself. The mobile and Pi connect with wifi. 
+The project using Android smartphone to control Raspberry pi, including basic moving by motors control, ultrasonic detection when Pi moving towards to the obstacle less than 10cm e.g, Pi will stop itself. And it also can detect current humiture if you want. The mobile and Pi connect with wifi. 
 
 
 Requirement Devices:
