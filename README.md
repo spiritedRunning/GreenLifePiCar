@@ -1,7 +1,14 @@
 GreenLifePiCar
 ==============
 
-The project using Android smartphone to control Raspberry pi, including basic moving by motors control, ultrasonic detection when Pi moving towards to the obstacle less than 10cm e.g, Pi will stop itself. And it also can detect current humiture if you want. The mobile and Pi connect with wifi. 
+The project using Android smartphone to control Raspberry pi, including basic moving by motor controlling, and support gravity sensing by G-Sensor built-in mobile phone.  When Pi moving towards to the obstacle, ultrasonic detection can make Pi stop itself if distance less than 10cm e.g. It also can detect current humiture if you want. However the mobile and Pi connect with wifi. The app can also display real-time imaging througn camera install in Pi. This can use for remote video monitor.
+
+
+<img src="https://github.com/spiritedRunning/GreenLifePiCar/raw/master/screenshots/20160726214000.jpg" width="30%" height="30%">
+<img src="https://github.com/spiritedRunning/GreenLifePiCar/raw/master/screenshots/20160726214832.jpg" width="30%" height="30%">
+<img src="https://github.com/spiritedRunning/GreenLifePiCar/raw/master/screenshots/20160726214545.jpg" width="50%" height="50%">
+<img src="https://github.com/spiritedRunning/GreenLifePiCar/raw/master/screenshots/20160726214723.jpg" width="50%" height="50%">
+
 
 
 Requirement Devices:
